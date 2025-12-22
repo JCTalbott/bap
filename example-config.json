@@ -1,0 +1,130 @@
+{
+  "ExcelSheets": {
+    "Subj": {
+      "Name": "Subject Property",
+      "DataType": "Property",
+      "Mappings": {
+        "~@property_name": "Property Name",
+        "~@property_address": "Address",
+        "~@property_owner": "Owner",
+        "~@building_area": "Building Area",
+        "~@site_area": "Site Area",
+        "~@year_built": "Year Built",
+        "~@property_type": "Property Type(s)",
+        "~@zoning": "Zoning"
+      },
+      "RequiredFields": ["~@property_name", "~@property_address"],
+      "HeaderRow": 1
+    },
+    "SSum": {
+      "Name": "Sales Summary",
+      "DataType": "Sales",
+      "Mappings": {
+        "~@sale_price": "Sale Price",
+        "~@date_of_sale": "Date of Sale",
+        "~@price_per_sf": "Price/SF",
+        "~@grantor": "Grantor",
+        "~@grantee": "Grantee",
+        "~@verification": "Verification",
+        "~@gross_building_area": "Gross Building Area (SF)",
+        "~@coverage_ratio": "Coverage Ratio",
+        "~@office_ratio": "Office Ratio",
+        "~@parking_ratio": "Parking Ratio",
+        "~@far": "FAR",
+        "~@loading": "Loading",
+        "~@access": "Access",
+        "~@quality": "Quality",
+        "~@effective_age": "Effective Age/Condition"
+      },
+      "RequiredFields": ["~@sale_price"],
+      "HeaderRow": 1
+    },
+    "RSum": {
+      "Name": "Rental Summary",
+      "DataType": "Rental",
+      "Mappings": {
+        "~@lease_rate": "Lease Rate (S/SF/Yr)",
+        "~@lease_date": "Lease Date",
+        "~@lease_term": "Lease Term",
+        "~@tenant": "Tenant",
+        "~@lease_type": "Lease Type",
+        "~@rentable_area": "Rentable Building Area (SF)",
+        "~@finished_ratio": "Finished Ratio",
+        "~@expense_structure": "Expense Structure"
+      },
+      "RequiredFields": ["~@lease_rate"],
+      "HeaderRow": 1
+    }
+  },
+  "Transformers": {
+    "currency": {
+      "Name": "Currency",
+      "Function": "FormatCurrency",
+      "Parameters": {
+        "format": "C"
+      }
+    },
+    "date": {
+      "Name": "Date",
+      "Function": "FormatDate",
+      "Parameters": {
+        "format": "MM/dd/yyyy"
+      }
+    },
+    "percentage": {
+      "Name": "Percentage",
+      "Function": "FormatPercentage",
+      "Parameters": {
+        "format": "P1"
+      }
+    },
+    "number": {
+      "Name": "Number",
+      "Function": "FormatNumber",
+      "Parameters": {
+        "format": "N0"
+      }
+    }
+  },
+  "WordTemplates": {
+    "property_report": {
+      "Name": "Property Report Template",
+      "TemplatePath": "doc-files/pony.docx",
+      "OutputPath": "doc-files/output_property_report.docx",
+      "PlaceholderPattern": "~@\\w+",
+      "SpecialSections": [
+        "Executive Summary",
+        "Property Analysis",
+        "Market Analysis",
+        "Financial Analysis",
+        "Conclusion"
+      ]
+    },
+    "sales_report": {
+      "Name": "Sales Report Template",
+      "TemplatePath": "doc-files/report.docx",
+      "OutputPath": "doc-files/output_sales_report.docx",
+      "PlaceholderPattern": "~@\\w+",
+      "SpecialSections": [
+        "Sales Analysis",
+        "Comparable Sales",
+        "Market Conditions"
+      ]
+    }
+  },
+  "Validation": {
+    "RequiredFields": [
+      "~@property_name",
+      "~@property_address",
+      "~@sale_price"
+    ],
+    "MaxFieldLength": 1000,
+    "ValidateNumbers": true,
+    "ValidateDates": true,
+    "AllowedDateFormats": [
+      "MM/dd/yyyy",
+      "yyyy-MM-dd",
+      "M/d/yyyy"
+    ]
+  }
+}

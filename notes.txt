@@ -1,0 +1,9 @@
+program is entry point of this dotnet application
+
+it calls dataholder to represent the read data from xl
+  goes thru xl and stores data in dictionary .. cell address maintained when necessary(?)
+
+also calls exceltoword(?)
+exceltoword will inject data into appropriate location in word
+  find indices of interest points
+  in order, replace each with appropriate data

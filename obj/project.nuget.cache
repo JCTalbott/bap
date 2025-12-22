@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "2Q4hZifA53IizZdqIphyLm+G49cRkMQvbUwW63x/26lEjab0xqoAsusgHuUZ5rRgi3rxG5eZd7fQp0Un8sQhLw==",
+  "success": true,
+  "projectFilePath": "/Users/jctalbott/Developer/father/open-sdk/open-sdk.csproj",
+  "expectedPackageFiles": [
+    "/Users/jctalbott/.nuget/packages/documentformat.openxml/3.0.1/documentformat.openxml.3.0.1.nupkg.sha512",
+    "/Users/jctalbott/.nuget/packages/documentformat.openxml.framework/3.0.1/documentformat.openxml.framework.3.0.1.nupkg.sha512",
+    "/Users/jctalbott/.nuget/packages/system.io.packaging/8.0.0/system.io.packaging.8.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
