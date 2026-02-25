@@ -114,11 +114,94 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
+// class Program
+// {
+//     static void Main(string[] args)
+//     {
+//         WordInjector wi = new WordInjector("doc-files/good.docx", "doc-files/dump/generated_report.docx");
+//         wi.Run();
+//     }
+// }
+
+using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Wordprocessing;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+
 class Program
 {
+    static void printNearby(string body, string finder, int back, int lngth, int instance) {
+        int startingSpot = -1;
+        for (int i = 0; i < instance; i++)
+        {
+            startingSpot = body.IndexOf(finder, startingSpot+1);
+        }
+        Console.WriteLine(body.Substring(startingSpot - back, lngth));
+    }
+
     static void Main(string[] args)
     {
-        WordInjector wi = new WordInjector("doc-files/good.docx", "doc-files/dump/generated_report.docx");
-        wi.Run();
+        string templatePath = "doc-files/test.docx";
+        string outputPath = "appraisal_report.docx";
+
+        byte[] templateBytes = File.ReadAllBytes(templatePath);
+        using (MemoryStream ms = new MemoryStream())
+        {
+            ms.Write(templateBytes, 0, templateBytes.Length);
+            ms.Position = 0;
+
+            using (WordprocessingDocument doc = WordprocessingDocument.Open(ms, true))
+            {
+                var mainPart = doc.MainDocumentPart!;
+                var bodyString = WordVitals.getDocString(doc);
+                Console.WriteLine(bodyString.IndexOf("Report Criteria",311395));
+                printNearby(bodyString, "Sales Comparison Approach", -4000, 80000, 5);
+                // var imageEngine = new WordImageEngine(mainPart);
+                // var imageTemplate = imageEngine.FindImageByAltText("TemplatePhoto1");
+                
+                // if (imageTemplate != null)
+                // {
+                //     var photos = new List<PhotoInput>
+                //     {
+                //         new PhotoInput { Path = "pics/image_rId97.png", Description = "Subject Front" },
+                //         new PhotoInput { Path = "pics/image_rId100.png", Description = "Subject Rear" },
+                //         new PhotoInput { Path = "pics/image_rId17.png", Description = "Kitchen" },
+                //         new PhotoInput { Path = "pics/image_rId18.png", Description = "Street View" }
+                //     };
+                //     imageEngine.GeneratePhotoPages(imageTemplate, photos);
+                // }
+                
+                // var tableEngine = new WordTableEngine(mainPart);
+                // var firstTable = tableEngine.FindTableAfterHeading("Executive Summary");
+                // if (firstTable != null)
+                // {
+                //     var model = tableEngine.ExtractModel(firstTable);
+                //     PrintTableInfo(model);
+                // }
+
+                doc.Save();
+            }
+
+            File.WriteAllBytes(outputPath, ms.ToArray());
+        }
+    }
+
+    static void PrintTableInfo(WordTableModel model)
+    {
+        Console.WriteLine("--- Table Metadata ---");
+        Console.WriteLine($"Style ID:    {model.TableStyleId ?? "None"}");
+        Console.WriteLine($"Total Width: {model.TableWidth?.ToString() ?? "Auto"}");
+        Console.WriteLine($"Width Type:  {model.WidthType?.ToString() ?? "N/A"}");
+        Console.WriteLine($"Columns:     {model.ColumnCount}");
+        
+        Console.WriteLine("\n--- Column Widths (Twips) ---");
+        for (int i = 0; i < model.ColumnWidths.Count; i++)
+        {
+            Console.WriteLine($"Column {i + 1}: {model.ColumnWidths[i]?.ToString() ?? "Unknown"}");
+        }
     }
 }
+
+

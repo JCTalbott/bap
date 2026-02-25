@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("open-sdk")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+992a7df09a165db4ccf01750f3edd27208bb5312")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d05576030852461c2a6a69e52266dda7a9ea2959")]
 [assembly: System.Reflection.AssemblyProductAttribute("open-sdk")]
 [assembly: System.Reflection.AssemblyTitleAttribute("open-sdk")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
